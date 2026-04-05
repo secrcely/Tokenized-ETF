@@ -44,6 +44,7 @@ contract ETFClearing {
     }
 
     function executeTrade(address buyer, address seller, uint256 etfAmount) external {
+        require(msg.sender == buyer, "Caller must be buyer");
         require(etfAmount > 0, "Invalid ETF amount");
         require(kycRegistry.isWhitelisted(buyer), "Buyer not whitelisted");
         require(kycRegistry.isWhitelisted(seller), "Seller not whitelisted");
